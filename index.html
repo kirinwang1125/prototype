@@ -12,51 +12,19 @@
             background-color: #f4f6f9;
             margin: 0;
             padding: 15px;
-            padding-top: 75px; /* 为顶部固定切换栏留出空间 */
             font-size: 13px;
             color: #333;
         }
 
-        .prototype-selector-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 55px;
+        .state-section-title {
+            margin: 25px 0 10px 0;
+            padding: 12px 15px;
             background-color: #111;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        .selector-title {
             color: #fff;
             font-weight: bold;
             font-size: 14px;
-            margin-right: 10px;
-        }
-        .mode-btn {
-            padding: 8px 16px;
-            border: 1px solid #444;
-            background-color: #222;
-            color: #aaa;
             border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 13px;
-            transition: all 0.2s ease;
-        }
-        .mode-btn:hover {
-            background-color: #333;
-            color: #fff;
-        }
-        .mode-btn.active {
-            background-color: #2bb673;
-            color: #fff;
-            border-color: #2bb673;
-            box-shadow: 0 0 8px rgba(43, 182, 115, 0.5);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         /* 基础 ERP 框架样式 */
@@ -78,7 +46,8 @@
         .card {
             background-color: #fff;
             border: 1px solid #d3d3d3;
-            margin-top: 15px;
+            margin-top: 5px;
+            margin-bottom: 25px;
             border-radius: 4px;
         }
         .text-link { color: #0066cc; text-decoration: none; cursor: pointer; }
@@ -107,11 +76,6 @@
             color: #333;
             display: flex;
             align-items: center;
-        }
-        .header-right-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
         }
 
         /* 复合动态标签状态机 */
@@ -253,7 +217,7 @@
         }
         .badge-count-clickable:hover {
             background-color: rgba(0,0,0,0.1);
-            transform: scale(1.1);
+            transform: scale(1.02);
         }
         
         /* 看板多模态自适应配色类 */
@@ -266,60 +230,8 @@
         .badge-disabled { border-color: #d9d9d9; background-color: #fafafa; color: #8c8c8c; }
 
         /* 头部扣款时间展示高亮样式 */
-        .header-notice-time {
-            font-size: 13px;
-            display: inline-flex;
-            align-items: center;
-        }
-        .highlight-time-orange { background-color: #fff0f6; border: 1px solid #ffadd2; color: #eb2f96; padding: 3px 8px; font-weight: bold; border-radius: 3px; margin-left: 4px;}
-        .highlight-time-blue { background-color: #bae7ff; border: 1px solid #69c0ff; color: #0050b3; padding: 3px 8px; font-weight: bold; border-radius: 3px; margin-left: 4px;}
-
-        /* 精简后的微动状态标签（带呼吸灯效果） */
-        .inline-status-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        .inline-status-tag.started {
-            background-color: #f0fdf4;
-            color: #16a34a;
-            border: 1px solid #bbf7d0;
-        }
-        .inline-status-tag.started:hover {
-            background-color: #dcfce7;
-            box-shadow: 0 2px 5px rgba(22,163,74,0.15);
-        }
-        .inline-status-tag .dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background-color: currentColor;
-            animation: tagPulse 2s infinite;
-        }
-        @keyframes tagPulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
-        }
-
-        /* 简易原生风格物流详情组件 */
-        .modal-tracking-details {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-            line-height: 1.6;
-        }
-        .tracking-row { margin-bottom: 8px; font-size: 13px; }
-        .tracking-code { font-family: monospace; font-weight: bold; color: #2563eb; background: #eff6ff; padding: 2px 6px; border-radius: 4px; }
+        .highlight-time-orange { background-color: #fff0f6; border: 1px solid #ffadd2; color: #eb2f96; padding: 3px 8px; font-weight: bold; border-radius: 3px; margin-left: 4px; text-decoration: none; display: inline-block; vertical-align: middle;}
+        .highlight-time-blue { background-color: #bae7ff; border: 1px solid #69c0ff; color: #0050b3; padding: 3px 8px; font-weight: bold; border-radius: 3px; margin-left: 4px; text-decoration: none; display: inline-block; vertical-align: middle;}
 
         /* 底部公共部分 */
         .btn-group { padding: 10px 15px; background-color: #fafafa; border-bottom: 1px solid #e0e0e0; display: flex; gap: 5px; flex-wrap: wrap; }
@@ -376,46 +288,80 @@
 </head>
 <body>
 
-    <div class="prototype-selector-bar">
-        <span class="selector-title">切换试衣单状态原型：</span>
-        <button class="mode-btn active" onclick="switchMode('happy_return', this)">状态一：Happy Returns 渠道 (部分归还)</button>
-        <button class="mode-btn" onclick="switchMode('label_partial', this)">状态二：Label 渠道 (捕获在途/部分入库)</button>
-        <button class="mode-btn" onclick="switchMode('label_all_kept', this)">状态三：Label 渠道 (完全保留/流程结束)</button>
-    </div>
-
+    <!-- ==========================================================================
+       状态一：Happy Returns 渠道 (部分归还)
+       ========================================================================== -->
+    <div class="state-section-title">状态一：Happy Returns 渠道 (部分归还)</div>
+    
     <div class="navbar">
-        <span>首页</span> &nbsp;/&nbsp; <span>客服工作台</span> &nbsp;/&nbsp; <span id="navOrderTitle">ERP订单详情 (Happy Returns)</span>
+        <span>首页</span> &nbsp;/&nbsp; <span>客服工作台</span> &nbsp;/&nbsp; <span>ERP订单详情 </span>
         <div class="tag">● ERP订单详情 ✕</div>
     </div>
 
     <div class="card">
-        <div class="info-grid" id="dynamicInfoGrid"></div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div><span>订单号：</span><strong>9773998465</strong> <a class="text-link" href="#">CMS detail</a></div>
+                <div><span>Order Date：</span><strong>2026-05-10 05:55:36</strong></div>
+                <div><span>Payment Method：</span><strong>Checkout credit&debit</strong></div>
+            </div>
+            <div class="info-item">
+                <div><span>Email：</span><strong class="text-link">jkvanvactor04@gmail.com</strong></div>
+                <div><span>来自网站：</span><strong>api.jjshouse.com</strong></div>
+                <div><span>该顾客总付款单量：</span><strong class="text-danger">3</strong></div>
+            </div>
+            <div class="info-item">
+                <div><span>本地金额：</span><strong>USD 50.54</strong></div>
+                <div><span>运费险：</span><strong>USD 0.99</strong></div>
+            </div>
+        </div>
 
-        <div class="trial-status-container" id="trialModuleContainer">
-            
-            <div class="toggle-icon-btn" title="收起/展开明细" onclick="toggleTrialModule()">
-                <div class="arrow-icon" id="arrowIcon"></div>
+        <div class="trial-status-container">
+            <div class="toggle-icon-btn" title="收起/展开明细" onclick="toggleTrialModule(1)">
+                <div class="arrow-icon" id="arrowIcon1"></div>
             </div>
 
             <div class="trial-header-summary">
                 <div class="current-main-status">
                     <span>试衣单总状态：</span>
-                    <span id="mainStatusTag" class="dynamic-status-tag tag-style-orange">部分归还</span>
+                    <span class="dynamic-status-tag tag-style-orange">部分归还</span>
                 </div>
                 <div class="header-right-actions">
-                    <div id="dynamicHeaderNotice" class="header-notice-time"></div>
-                    <button id="suspendActionBtn" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">暂停试衣扣款和邮件</button>
+                    <button class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">暂停试衣扣款和邮件</button>
                 </div>
             </div>
 
-            <div class="collapsible-content" id="collapsibleContent">
-                
-                <div class="timeline-steps" id="dynamicTimelineContainer"></div>
+            <div class="collapsible-content" id="collapsibleContent1">
+                <div class="timeline-steps">
+                    <div class="timeline-progress-line" style="width: 75%;"></div>
+                    <div class="step-item completed"><div class="step-dot">✓</div><div class="step-title">1. 试衣件送达</div><div class="step-time">05-14 15:29</div></div>
+                    <div class="step-item completed"><div class="step-dot">✓</div><div class="step-title">2. 线下归还(HR)</div><div class="step-time">05-21 14:22</div></div>
+                    <div class="step-item active-orange"><div class="step-dot">3</div><div class="step-title">3. 触发入库扣款</div><div class="step-time">05-25 23:00</div></div>
+                    <div class="step-item"><div class="step-dot">4</div><div class="step-title">4. 试衣流程结束</div><div class="step-time">-</div></div>
+                </div>
 
-                <div class="items-status-dashboard" id="dynamicDashboardContainer"></div>
-
+                <div class="items-status-dashboard">
+                    <div class="dashboard-title">本单试衣数量共: 3 件</div>
+                    <div class="status-badge-card badge-disabled">
+                        <span>● 用户标记保留:</span>
+                        <span class="badge-count-clickable" style="color: #8c8c8c; text-decoration:none; cursor:default;">0 件</span>
+                    </div>
+                    <div class="status-badge-card badge-wh-inbound">
+                        <span>● HR线下已归还,未入库:</span>
+                        <span class="badge-count-clickable" onclick="openGoodsModal('hr')">2 件</span>
+                    </div>
+                    <div class="status-badge-card badge-disabled">
+                        <span>● 海外仓已入库:</span>
+                        <span class="badge-count-clickable" style="color: #8c8c8c; text-decoration:none; cursor:default;">0 件</span>
+                    </div>
+                    <div class="status-badge-card badge-deducting">
+                        <span>● 触发扣款:</span>
+                        <span class="badge-count-clickable" style="color: #cf1322;" onclick="openGoodsModal('deduct')">
+                            1 件 <span style="font-weight:normal; color:#333; font-size:12px; text-decoration:none; margin-left:4px;">(<strong>预计扣款时间：</strong><span class="highlight-time-orange">2026-05-25 23:00:00</span>)</span>
+                        </span>
+                    </div>
+                </div>
             </div>
-            
         </div>
 
         <div class="btn-group">
@@ -429,161 +375,217 @@
 
         <div class="erp-section">
             <div class="erp-header">ERP信息</div>
-            <div class="erp-body" id="dynamicErpBody"></div>
+            <div class="erp-body">
+                <div>
+                    <div><strong>送货地址:</strong></div>
+                    <div style="margin-left: 10px;">Jade Van Vactor<br>353 Sign Pine Road<br>United States</div>
+                </div>
+                <div>
+                    <div><span>ERP单号：</span><strong>7378525980</strong></div>
+                    <div><span>快递公司：</span><strong>捷仓-USPS-GA</strong></div>
+                </div>
+            </div>
         </div>
     </div>
 
+
+    <!-- ==========================================================================
+       状态二：Label 渠道 (部分入库)
+       ========================================================================== -->
+    <div class="state-section-title">状态二：Label 渠道 (部分入库)</div>
+    
+    <div class="navbar">
+        <span>首页</span> &nbsp;/&nbsp; <span>客服工作台</span> &nbsp;/&nbsp; <span>ERP订单详情 </span>
+        <div class="tag">● ERP订单详情 ✕</div>
+    </div>
+
+    <div class="card">
+        <div class="info-grid">
+            <div class="info-item">
+                <div><span>订单号：</span><strong>9855411230</strong></div>
+                <div><span>Order Date：</span><strong>2026-05-08 10:14:22</strong></div>
+                <div><span>Payment Method：</span><strong>Checkout credit&debit</strong></div>
+            </div>
+            <div class="info-item">
+                <div><span>Email：</span><strong class="text-link">clara.smith@gmail.com</strong></div>
+                <div><span>来自网站：</span><strong>api.jjshouse.com</strong></div>
+                <div><span>该顾客总付款单量：</span><strong class="text-danger">1</strong></div>
+            </div>
+            <div class="info-item">
+                <div><span>本地金额：</span><strong>USD 45.99</strong></div>
+                <div><span>运费险：</span><strong>USD 0.99</strong></div>
+            </div>
+        </div>
+
+        <div class="trial-status-container">
+            <div class="toggle-icon-btn" title="收起/展开明细" onclick="toggleTrialModule(2)">
+                <div class="arrow-icon" id="arrowIcon2"></div>
+            </div>
+
+            <div class="trial-header-summary">
+                <div class="current-main-status">
+                    <span>试衣单总状态：</span>
+                    <span class="dynamic-status-tag tag-style-blue">部分归还</span>
+                </div>
+                <div class="header-right-actions">
+                    <button class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">暂停试衣扣款和邮件</button>
+                </div>
+            </div>
+
+            <div class="collapsible-content" id="collapsibleContent2">
+                <div class="timeline-steps">
+                    <div class="timeline-progress-line" style="width: 60%;"></div>
+                    <div class="step-item completed"><div class="step-dot">✓</div><div class="step-title">1. 试衣件送达</div><div class="step-time">05-12 10:00</div></div>
+                    <div class="step-item completed"><div class="step-dot">✓</div><div class="step-title">2. 识别到退回轨迹</div><div class="step-time">05-17 14:35</div></div>
+                    <div class="step-item completed"><div class="step-dot">✓</div><div class="step-title">3. 退货首次入库</div><div class="step-time">05-20 23:00</div></div>
+                    <div class="step-item active-blue"><div class="step-dot">4</div><div class="step-title">4. 等待7天缓冲期</div><div class="step-time">  </div></div>
+                    <div class="step-item"><div class="step-dot">5</div><div class="step-title">5. 触发自动扣款</div><div class="step-time">05-27 23:00 </div></div>
+                </div>
+
+                <div class="items-status-dashboard">
+                    <div class="dashboard-title">本单试衣数量共: 3 件</div>
+                    <div class="status-badge-card badge-disabled">
+                        <span>● 用户标记保留:</span>
+                        <span class="badge-count-clickable" style="color: #8c8c8c; text-decoration:none; cursor:default;">0 件</span>
+                    </div>
+                    <div class="status-badge-card badge-wh-inbound-solid">
+                        <span>● 海外仓已入库:</span>
+                        <span class="badge-count-clickable" onclick="openGoodsModal('label_inbound')">1 件</span>
+                    </div>
+                    <div class="status-badge-card badge-deducting">
+                        <span>● 触发扣款:</span>
+                        <span class="badge-count-clickable" style="color: #cf1322;" onclick="openGoodsModal('label_deduct')">
+                            2 件 <span style="font-weight:normal; color:#333; font-size:12px; text-decoration:none; margin-left:4px;">(<strong>预计自动扣款时间：</strong><span class="highlight-time-blue">2026-05-25 23:00:00</span>)</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-success">创建Ticket</button>
+            <button class="btn">电话备注</button>
+            <button class="btn">添加备注</button>
+            <button class="btn btn-action">退款申请</button>
+            <button class="btn btn-action">退货入US Warehouse</button>
+            <button class="btn">查看退货申请</button>
+        </div>
+
+        <div class="erp-section">
+            <div class="erp-header">ERP信息</div>
+            <div class="erp-body">
+                <div>
+                    <div><strong>送货地址:</strong></div>
+                    <div style="margin-left: 10px;">Clara Smith<br>742 Evergreen Terrace<br>United States</div>
+                </div>
+                <div>
+                    <div><span>ERP单号：</span><strong>7388511421</strong></div>
+                    <div><span>快递公司：</span><strong>捷仓-UPS-Ground</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+       状态三：Label 渠道 (完全保留/流程结束)
+       ========================================================================== -->
+    <div class="state-section-title">状态三：Label 渠道 (完全保留)</div>
+    
+    <div class="navbar">
+        <span>首页</span> &nbsp;/&nbsp; <span>客服工作台</span> &nbsp;/&nbsp; <span>ERP订单详情 </span>
+        <div class="tag">● ERP订单详情 ✕</div>
+    </div>
+
+    <div class="card">
+        <div class="info-grid">
+            <div class="info-item">
+                <div><span>订单号：</span><strong>9855422611</strong></div>
+                <div><span>Order Date：</span><strong>2026-05-02 14:20:11</strong></div>
+                <div><span>Payment Method：</span><strong>Checkout credit&debit</strong></div>
+            </div>
+            <div class="info-item">
+                <div><span>Email：</span><strong class="text-link">sarah.jones@gmail.com</strong></div>
+                <div><span>来自网站：</span><strong>api.jjshouse.com</strong></div>
+                <div><span>该顾客总付款单量：</span><strong class="text-danger">2</strong></div>
+            </div>
+            <div class="info-item">
+                <div><span>本地金额：</span><strong>USD 385.00</strong></div>
+                <div><span>运费险：</span><strong>USD 0.99</strong></div>
+            </div>
+        </div>
+
+        <div class="trial-status-container">
+            <div class="toggle-icon-btn" title="收起/展开明细" onclick="toggleTrialModule(3)">
+                <div class="arrow-icon" id="arrowIcon3"></div>
+            </div>
+
+            <div class="trial-header-summary">
+                <div class="current-main-status">
+                    <span>试衣单总状态：</span>
+                    <span class="dynamic-status-tag tag-style-green">已完全保留</span>
+                </div>
+                <div class="header-right-actions">
+                </div>
+            </div>
+
+            <div class="collapsible-content" id="collapsibleContent3">
+                <!-- 时间线已根据要求移除 -->
+                <div class="items-status-dashboard">
+                    <div class="dashboard-title">本单试衣数量共: 3 件</div>
+                    <div class="status-badge-card badge-kept-active">
+                        <span>● 用户标记保留:</span>
+                        <span class="badge-count-clickable" onclick="openGoodsModal('kept_all')">3 件</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-success">创建Ticket</button>
+            <button class="btn">电话备注</button>
+            <button class="btn">添加备注</button>
+            <button class="btn btn-action">退款申请</button>
+            <button class="btn btn-action">退货入US Warehouse</button>
+            <button class="btn">查看退货申请</button>
+        </div>
+
+        <div class="erp-section">
+            <div class="erp-header">ERP信息</div>
+            <div class="erp-body">
+                <div>
+                    <div><strong>送货地址:</strong></div>
+                    <div style="margin-left: 10px;">Sarah Jones<br>128 Ocean Drive<br>United States</div>
+                </div>
+                <div>
+                    <div><span>ERP单号：</span><strong>7399552140</strong></div>
+                    <div><span>快递公司：</span><strong>捷仓-DHL-Packet</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态弹窗系统 -->
     <div class="modal-overlay" id="goodsListModal" onclick="closeGoodsModal(event)">
         <div class="modal-content-box" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <span class="modal-title" id="modalDynamicTitle">商品明细展示</span>
                 <span class="modal-close-btn" onclick="closeGoodsModal(true)">&times;</span>
             </div>
-            <div class="modal-body" id="modalDynamicBody">
-                </div>
+            <div class="modal-body" id="modalDynamicBody"></div>
         </div>
     </div>
 
     <script>
-        // 当前激活的全局状态标识符
-        let currentActiveMode = "happy_return";
-        let isModuleExpanded = true;
+        let expandedStates = { 1: true, 2: true, 3: true };
 
-        // 三种业务场景的完整原型字典数据库
-        const dataset = {
-            happy_return: {
-                navTitle: "ERP订单详情",
-                mainStatusText: "部分归还",
-                mainStatusClass: "dynamic-status-tag tag-style-orange",
-                showSuspendBtn: true,
-                orderInfo: {
-                    id: "9773998465", date: "2026-05-10 05:55:36", method: "Checkout credit&debit",
-                    email: "jkvanvactor04@gmail.com", site: "api.jjshouse.com", paidCount: "3",
-                    localAmt: "USD 50.54", insurance: "USD 0.99"
-                },
-                timeline: {
-                    progressWidth: "75%",
-                    steps: [
-                        { type: "completed", dot: "✓", title: "1. 试衣件送达", time: "05-14 15:29" },
-                        { type: "completed", dot: "✓", title: "2. 线下归还(HR)", time: "05-21 14:22" },
-                        { type: "active-orange", dot: "3", title: "3. 触发入库扣款", time: "今日执行" },
-                        { type: "", dot: "4", title: "4. 试衣流程结束", time: "-" }
-                    ]
-                },
-                dashboard: {
-                    total: 3,
-                    badges: [
-                        { class: "badge-hr-return", label: "HR线下已归还", count: 2, action: "openGoodsModal('hr')" },
-                        { class: "badge-wh-inbound", label: "海外仓确认入库", count: 2, action: "openGoodsModal('warehouse')" },
-                        { class: "badge-deducting", label: "未退回/触发扣款", count: 1, action: "openGoodsModal('deduct')", highlight: true },
-                        { class: "badge-disabled", label: "用户标记保留", count: 0 }
-                    ]
-                },
-                headerNoticeHtml: `
-                    <strong>预计扣款时间：</strong>
-                    <span class="highlight-time-orange">2026-05-25 23:00:00</span>
-                `,
-                erpInfo: {
-                    address: "Jade Van Vactor<br>353 Sign Pine Road<br>United States",
-                    erpId: "7378525980",
-                    carrier: "捷仓-USPS-GA"
-                }
-            },
-
-            label_partial: {
-                navTitle: "ERP订单详情",
-                mainStatusText: "部分入库 / 退回在途",
-                mainStatusClass: "dynamic-status-tag tag-style-blue",
-                showSuspendBtn: true,
-                orderInfo: {
-                    id: "9855411230", date: "2026-05-08 10:14:22", method: "Checkout credit&debit",
-                    email: "clara.smith@gmail.com", site: "api.jjshouse.com", paidCount: "1",
-                    localAmt: "USD 45.99", insurance: "USD 0.99"
-                },
-                timeline: {
-                    progressWidth: "60%",
-                    steps: [
-                        { type: "completed", dot: "✓", title: "1. 试衣件送达", time: "05-12 10:00" },
-                        { type: "completed", dot: "✓", title: "2. 识别到退回轨迹", time: "05-17 14:35" },
-                        { type: "completed", dot: "✓", title: "3. 退货首次入库", time: "05-20 23:00" },
-                        { type: "active-blue", dot: "4", title: "4. 等待7天缓冲期", time: "第 3 天/共7天" },
-                        { type: "", dot: "5", title: "5. 触发自动扣款", time: "05-25 23:00 " }
-                    ]
-                },
-                dashboard: {
-                    total: 3,
-                    badges: [
-                        { class: "badge-label-transit", label: "Label邮寄在途/已寄出", count: 2, action: "openGoodsModal('label_transit')" },
-                        { class: "badge-wh-inbound-solid", label: "仓库已确认入库", count: 1, action: "openGoodsModal('label_inbound')" },
-                        { class: "badge-deducting", label: "未入库/待触发扣款", count: 2, action: "openGoodsModal('label_deduct')", highlight: true },
-                        { class: "badge-disabled", label: "用户标记保留", count: 0 }
-                    ]
-                },
-                headerNoticeHtml: `
-                    <strong>预计自动扣款时间：</strong>
-                    <span class="highlight-time-blue">2026-05-25 23:00:00</span>
-                `,
-                erpInfo: {
-                    address: "Clara Smith<br>742 Evergreen Terrace<br>United States",
-                    erpId: "7388511421",
-                    carrier: "捷仓-UPS-Ground"
-                }
-            },
-
-            label_all_kept: {
-                navTitle: "ERP订单详情 ",
-                mainStatusText: "已完全保留（流程结束）",
-                mainStatusClass: "dynamic-status-tag tag-style-green",
-                showSuspendBtn: false,
-                orderInfo: {
-                    id: "9855422611", date: "2026-05-02 14:20:11", method: "Checkout credit&debit",
-                    email: "sarah.jones@gmail.com", site: "api.jjshouse.com", paidCount: "2",
-                    localAmt: "USD 385.00", insurance: "USD 0.99"
-                },
-                timeline: {
-                    progressWidth: "0%", 
-                    steps: [
-                        { type: "completed", dot: "✓", title: "1. 试衣件送达", time: "05-06 11:00" },
-                        { type: "completed", dot: "✓", title: "2. 识别到退回轨迹", time: "-" },
-                        { type: "disabled", dot: "3", title: "3. 退货首次入库", time: "-" },
-                        { type: "disabled", dot: "4", title: "4. 等待7天缓冲期", time: "-" },
-                        { type: "completed", dot: "✓", title: "5. 试衣流程结束", time: "05-23 10:00" }
-                    ]
-                },
-                dashboard: {
-                    total: 3,
-                    badges: [
-                        { class: "badge-disabled", label: "Label邮寄在途/已寄出", count: 0 },
-                        { class: "badge-disabled", label: "仓库已确认入库", count: 0 },
-                        { class: "badge-disabled", label: "未入库/待触发扣款", count: 0 },
-                        { class: "badge-kept-active", label: "用户标记保留", count: 3, action: "openGoodsModal('kept_all')" }
-                    ]
-                },
-                headerNoticeHtml: "", // 完全保留状态无扣款倒计时
-                erpInfo: {
-                    address: "Sarah Jones<br>128 Ocean Drive<br>United States",
-                    erpId: "7399552140",
-                    carrier: "捷仓-DHL-Packet"
-                }
-            }
-        };
-
-        // 弹窗数据中心
         const mockGoodsData = {
             hr: [
                 { name: "A-Line Satin Try-on Dress (Burgundy / US 6)", sku: "c204g118921y20406s20406", status: "HR已线下揽收", price: "$15.00", imgText: "礼服A" },
                 { name: "Mermaid Chiffon Try-on Dress (Dark Navy / US 8)", sku: "c305g224056y30508s30508", status: "HR已线下揽收", price: "$15.00", imgText: "礼服B" }
             ],
-            warehouse: [
-                { name: "A-Line Satin Try-on Dress (Burgundy / US 6)", sku: "c204g118921y20406s20406", status: "海外仓已确认入库", price: "$15.00", imgText: "礼服A" },
-                { name: "Mermaid Chiffon Try-on Dress (Dark Navy / US 8)", sku: "c305g224056y30508s30508", status: "海外仓已确认入库", price: "$15.00", imgText: "礼服B" }
-            ],
             deduct: [
                 { name: "V-Neck Try-on Bridesmaid Dress (Dusty Blue / US 4)", sku: "c411g307062y28402s28470", status: "未退回(待扣全价)", price: "$119.00", imgText: "保留款" }
-            ],
-            label_transit: [
-                { name: "A-Line Satin Try-on Dress (Burgundy / US 6)", sku: "c204g118921y20406s20406", status: "邮寄面单已产生在途轨迹(已寄出)", price: "$15.00", imgText: "礼服A" },
-                { name: "Mermaid Chiffon Try-on Dress (Dark Navy / US 8)", sku: "c305g224056y30508s30508", status: "邮寄面单已产生在途轨迹(已寄出)", price: "$15.00", imgText: "礼服B" }
             ],
             label_inbound: [
                 { name: "Luxury Lace Trumpet Try-on Dress (Ivory / US 6)", sku: "w110g55410y11006s11006", status: "海外仓入库(扫描成功)", price: "$15.00", imgText: "婚纱A" }
@@ -599,112 +601,15 @@
             ]
         };
 
-        function switchMode(modeKey, btnDom) {
-            currentActiveMode = modeKey;
-            const data = dataset[modeKey];
-
-            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-            btnDom.classList.add('active');
-
-            document.getElementById('navOrderTitle').innerText = data.navTitle;
-            const tagDom = document.getElementById('mainStatusTag');
-            tagDom.innerText = data.mainStatusText;
-            tagDom.className = data.mainStatusClass;
-
-            document.getElementById('suspendActionBtn').style.display = data.showSuspendBtn ? 'block' : 'none';
-
-            const info = data.orderInfo;
-            document.getElementById('dynamicInfoGrid').innerHTML = `
-                <div class="info-item">
-                    <div><span>订单号：</span><strong>${info.id}</strong> <a class="text-link" href="#">CMS detail</a></div>
-                    <div><span>Order Date：</span><strong>${info.date}</strong></div>
-                    <div><span>Payment Method：</span><strong>${info.method}</strong></div>
-                </div>
-                <div class="info-item">
-                    <div><span>Email：</span><strong class="text-link">${info.email}</strong></div>
-                    <div><span>来自网站：</span><strong>${info.site}</strong></div>
-                    <div><span>该顾客总付款单量：</span><strong class="text-danger">${info.paidCount}</strong></div>
-                </div>
-                <div class="info-item">
-                    <div><span>本地金额：</span><strong>${info.localAmt}</strong></div>
-                    <div><span>运费险：</span><strong>${info.insurance}</strong></div>
-                </div>
-            `;
-
-            let stepsHtml = `<div class="timeline-progress-line" style="width: ${data.timeline.progressWidth};"></div>`;
-            data.timeline.steps.forEach(step => {
-                stepsHtml += `
-                    <div class="step-item ${step.type}">
-                        <div class="step-dot">${step.dot}</div>
-                        <div class="step-title">${step.title}</div>
-                        <div class="step-time">${step.time}</div>
-                    </div>
-                `;
-            });
-            document.getElementById('dynamicTimelineContainer').innerHTML = stepsHtml;
-
-            let dbHtml = `<div class="dashboard-title">本单试衣数量共: ${data.dashboard.total} 件</div>`;
-            data.dashboard.badges.forEach(badge => {
-                const isClickable = badge.count > 0 && badge.action;
-                const countStyle = badge.highlight ? "color: #cf1322;" : (isClickable ? "" : "color: #8c8c8c; text-decoration:none; cursor:default;");
-                const actionAttr = isClickable ? `onclick="${badge.action}"` : "";
-                
-                dbHtml += `
-                    <div class="status-badge-card ${badge.class}">
-                        <span>● ${badge.label}:</span>
-                        <span class="badge-count-clickable" style="${countStyle}" ${actionAttr}>${badge.count} 件</span>
-                    </div>
-                `;
-            });
-            document.getElementById('dynamicDashboardContainer').innerHTML = dbHtml;
-
-            // 将通知时间更新到顶部同行区域
-            const noticeDom = document.getElementById('dynamicHeaderNotice');
-            noticeDom.innerHTML = data.headerNoticeHtml || "";
-
-            document.getElementById('dynamicErpBody').innerHTML = `
-                <div>
-                    <div><strong>送货地址:</strong></div>
-                    <div style="margin-left: 10px;">${data.erpInfo.address}</div>
-                </div>
-                <div>
-                    <div><span>ERP单号：</span><strong>${data.erpInfo.erpId}</strong></div>
-                    <div><span>快递公司：</span><strong>${data.erpInfo.carrier}</strong></div>
-                </div>
-            `;
-        }
-
-        // 统一打开明细与轨迹窗口逻辑
         function openGoodsModal(type) {
             const bodyContainer = document.getElementById('modalDynamicBody');
             const titleContainer = document.getElementById('modalDynamicTitle');
-            
-            // 处理特殊的轨迹点击窗口
-            if (type === 'label_trace_window') {
-                titleContainer.innerText = "🔍 退回订单的物流轨迹查看窗口";
-                bodyContainer.innerHTML = `
-                    <div class="modal-tracking-details">
-                        <div class="tracking-row"><strong>面单单号:</strong> <span class="tracking-code">1Z999AA10123456784</span></div>
-                        <div class="tracking-row"><strong>最新轨迹:</strong> <span style="color:#16a34a; font-weight:bold;">[已开始归还 - 物流途中揽收]</span></div>
-                        <div class="tracking-row"><strong>交寄时间:</strong> 2026-05-17 14:35:00</div>
-                        <div class="tracking-row"><strong>承运商联络:</strong> USPS / UPS Carrier</div>
-                        <hr style="border:none; border-top:1px dashed #cbd5e1; margin:12px 0;">
-                        <p style="margin:0; font-size:12px; color:#64748b;">系统已成功捕捉其有效的退回物流在途行为，自动将其移入5天缓冲扣款周期保护。</p>
-                    </div>
-                `;
-                document.getElementById('goodsListModal').style.display = 'flex';
-                return;
-            }
-
-            // 原有的商品明细解析
             const data = mockGoodsData[type];
-            if (!data || data.length === 0) return;
+            if (!data) return;
 
             let titleText = "商品明细展示";
             if (type === 'hr') titleText = "● (Happy Returns) 线下已确认归还商品明细 (共 2 件)";
-            if (type === 'warehouse') titleText = "● 海外仓实物确认上架入库明细 (共 2 件)";
             if (type === 'deduct') titleText = "● 顾客逾期未归还 - 待触发自动扣取全价商品 (共 1 件)";
-          
             if (type === 'label_inbound') titleText = "● (Label Return) 邮寄面单海外仓已扫描入库明细 (共 1 件)";
             if (type === 'label_deduct') titleText = "● (Label Return) 尚未入库 / 处于5天缓冲中待结算商品 (共 2 件)";
             if (type === 'kept_all') titleText = "● 顾客在前台自主标记保留 / 逾期自动保留商品明细 (共 3 件)";
@@ -718,7 +623,7 @@
                             <th width="15%">商品图片</th>
                             <th width="55%">商品名称 / SKU</th>
                             <th width="15%">试衣状态</th>
-                            <th width="15%">价格(税后)</th>
+                            <th width="15%">价格</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -738,30 +643,24 @@
             });
             tableHtml += `</tbody></table>`;
             bodyContainer.innerHTML = tableHtml;
-
             document.getElementById('goodsListModal').style.display = 'flex';
         }
 
-        function closeGoodsModal(force) {
+        function closeGoodsModal() {
             document.getElementById('goodsListModal').style.display = 'none';
         }
 
-        function toggleTrialModule() {
-            const content = document.getElementById('collapsibleContent');
-            const arrow = document.getElementById('arrowIcon');
-            if (isModuleExpanded) {
+        function toggleTrialModule(id) {
+            const content = document.getElementById('collapsibleContent' + id);
+            const arrow = document.getElementById('arrowIcon' + id);
+            if (expandedStates[id]) {
                 content.style.display = 'none';
                 arrow.classList.add('collapsed');
             } else {
                 content.style.display = 'block';
                 arrow.classList.remove('collapsed');
             }
-            isModuleExpanded = !isModuleExpanded;
-        }
-
-        // 初始化运行第一个状态
-        window.onload = function() {
-            switchMode('happy_return', document.querySelectorAll('.mode-btn')[0]);
+            expandedStates[id] = !expandedStates[id];
         }
     </script>
 </body>
