@@ -108,6 +108,11 @@
             display: flex;
             align-items: center;
         }
+        .header-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
         /* 复合动态标签状态机 */
         .dynamic-status-tag {
@@ -216,7 +221,7 @@
             border: 1px solid #e8e8e8;
             border-radius: 4px;
             padding: 12px 15px;
-            margin-bottom: 15px;
+            margin-bottom: 0px;
             display: flex;
             gap: 15px;
             align-items: center;
@@ -260,20 +265,14 @@
         .badge-kept-active { border-color: #ffe7ba; background-color: #fff7e6; color: #d46b08; border-width: 1.5px; }
         .badge-disabled { border-color: #d9d9d9; background-color: #fafafa; color: #8c8c8c; }
 
-        /* 5. 核心动态系统通知提示框 */
-        .notice-container-box {
-            padding: 12px;
-            border-radius: 4px;
-            line-height: 1.6;
-            transition: all 0.3s;
+        /* 头部扣款时间展示高亮样式 */
+        .header-notice-time {
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
         }
-        .box-style-orange { background-color: #fff8f8; border: 1px solid #ffcccc; }
-        .box-style-blue { background-color: #e6f7ff; border: 1px solid #91d5ff; }
-        .box-style-green { background-color: #f6ffed; border: 1px solid #b7eb8f; }
-
-        .highlight-time-orange { background-color: #fff0f6; border: 1px solid #ffadd2; color: #eb2f96; padding: 2px 6px; font-weight: bold; border-radius: 3px; }
-        .highlight-time-blue { background-color: #bae7ff; border: 1px solid #69c0ff; color: #0050b3; padding: 2px 6px; font-weight: bold; border-radius: 3px; }
-        .highlight-time-green { background-color: #e6f7ff; border: 1px solid #91d5ff; color: #1890ff; padding: 2px 6px; font-weight: bold; border-radius: 3px; }
+        .highlight-time-orange { background-color: #fff0f6; border: 1px solid #ffadd2; color: #eb2f96; padding: 3px 8px; font-weight: bold; border-radius: 3px; margin-left: 4px;}
+        .highlight-time-blue { background-color: #bae7ff; border: 1px solid #69c0ff; color: #0050b3; padding: 3px 8px; font-weight: bold; border-radius: 3px; margin-left: 4px;}
 
         /* 精简后的微动状态标签（带呼吸灯效果） */
         .inline-status-tag {
@@ -403,7 +402,10 @@
                     <span>试衣单总状态：</span>
                     <span id="mainStatusTag" class="dynamic-status-tag tag-style-orange">部分归还</span>
                 </div>
-                <button id="suspendActionBtn" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">暂停试衣扣款和邮件</button>
+                <div class="header-right-actions">
+                    <div id="dynamicHeaderNotice" class="header-notice-time"></div>
+                    <button id="suspendActionBtn" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">暂停试衣扣款和邮件</button>
+                </div>
             </div>
 
             <div class="collapsible-content" id="collapsibleContent">
@@ -412,7 +414,6 @@
 
                 <div class="items-status-dashboard" id="dynamicDashboardContainer"></div>
 
-                <div class="notice-container-box box-style-orange" id="dynamicNoticeBox"></div>
             </div>
             
         </div>
@@ -478,17 +479,10 @@
                         { class: "badge-disabled", label: "用户标记保留", count: 0 }
                     ]
                 },
-                notice: {
-                    class: "notice-container-box box-style-orange",
-                    html: `
-                        <div>
-                            <strong>预计扣款时间：</strong>
-                            <span class="highlight-time-orange">2026-05-25 23:00:00</span> 
-                            <span style="color: #666; margin-left: 10px;"></span>
-                        </div>
-                      
-                    `
-                },
+                headerNoticeHtml: `
+                    <strong>预计扣款时间：</strong>
+                    <span class="highlight-time-orange">2026-05-25 23:00:00</span>
+                `,
                 erpInfo: {
                     address: "Jade Van Vactor<br>353 Sign Pine Road<br>United States",
                     erpId: "7378525980",
@@ -525,17 +519,10 @@
                         { class: "badge-disabled", label: "用户标记保留", count: 0 }
                     ]
                 },
-                notice: {
-                    class: "notice-container-box box-style-blue",
-                    html: `
-                        <div>
-                            <strong>预计自动扣款时间：</strong>
-                            <span class="highlight-time-blue">2026-05-25 23:00:00</span> 
-                          
-                        </div>
-                     
-                    `
-                },
+                headerNoticeHtml: `
+                    <strong>预计自动扣款时间：</strong>
+                    <span class="highlight-time-blue">2026-05-25 23:00:00</span>
+                `,
                 erpInfo: {
                     address: "Clara Smith<br>742 Evergreen Terrace<br>United States",
                     erpId: "7388511421",
@@ -572,7 +559,7 @@
                         { class: "badge-kept-active", label: "用户标记保留", count: 3, action: "openGoodsModal('kept_all')" }
                     ]
                 },
-            
+                headerNoticeHtml: "", // 完全保留状态无扣款倒计时
                 erpInfo: {
                     address: "Sarah Jones<br>128 Ocean Drive<br>United States",
                     erpId: "7399552140",
@@ -671,9 +658,9 @@
             });
             document.getElementById('dynamicDashboardContainer').innerHTML = dbHtml;
 
-            const noticeDom = document.getElementById('dynamicNoticeBox');
-            noticeDom.className = data.notice.class;
-            noticeDom.innerHTML = data.notice.html;
+            // 将通知时间更新到顶部同行区域
+            const noticeDom = document.getElementById('dynamicHeaderNotice');
+            noticeDom.innerHTML = data.headerNoticeHtml || "";
 
             document.getElementById('dynamicErpBody').innerHTML = `
                 <div>
